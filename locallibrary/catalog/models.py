@@ -90,3 +90,58 @@ class Language(models.Model):
     def __str__(self):
         """String for representing the Model object (in Admin site etc.)"""
         return self.name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Director(models.Model):
+
+
+    def __str__(self):
+        return f'{self.last_name}, {self.first_name}'
+
+class MovieGenre(models.Model):
+    name = models.CharField(max_length=100, help_text="Enter the name of the movie genre")
+
+    def __str__(self):
+        return self.name
+
+
+class Movie(models.Model):
+    name = models.Charfield(max_length=200, help_text="Enter the name of the movie")
+    release_date = models.DateField(null=False, blank=False)
+    due_date = models.DateField(null=False, blank=True)
+    director = models.CharField(max_length=100, help_text="Enter the name of the director")
+    genre = models.ManyToManyField(MovieGenre, help_text="Enter the genre of movie")
+
+    def __str__(self):
+        return self.name
