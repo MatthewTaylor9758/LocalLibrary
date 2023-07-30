@@ -124,7 +124,14 @@ class Language(models.Model):
 
 
 class Director(models.Model):
+    first_name = models.CharField(max_length=200, help_text="Enter the first name of the director")
+    last_name = models.CharField(max_length=200, help_text="Enter the last name of the director")
 
+    class Meta:
+        ordering = ['last_name', 'first_name']
+
+    def get_absolute_url(self):
+        return reverse('model-detail-view', args=[str(self.id)])
 
     def __str__(self):
         return f'{self.last_name}, {self.first_name}'
@@ -135,13 +142,13 @@ class MovieGenre(models.Model):
     def __str__(self):
         return self.name
 
-
 class Movie(models.Model):
-    name = models.Charfield(max_length=200, help_text="Enter the name of the movie")
+    name = models.CharField(max_length=200, help_text="Enter the name of the movie")
     release_date = models.DateField(null=False, blank=False)
     due_date = models.DateField(null=False, blank=True)
-    director = models.CharField(max_length=100, help_text="Enter the name of the director")
+    director = models.ForeignKey(Director, on_delete=models.SET_NULL, null=True)
     genre = models.ManyToManyField(MovieGenre, help_text="Enter the genre of movie")
+    synopsis = models.TextField(max_length=1000, help_text="Enter the synopsis of the movie")
 
     def __str__(self):
         return self.name
