@@ -152,3 +152,29 @@ class Movie(models.Model):
 
     def __str__(self):
         return self.name
+
+class MovieInstance(self):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="The unique id for this instance of a movie")
+    movie = models.ForeignKey(Movie, on_delete=models.PROTECT, null=True)
+    due_date = models.DateField(null=True, blank=True)
+
+    LOAN_STATUS = (
+        ('m', 'Maintenance'),
+        ('o', 'On loan'),
+        ('a', 'Available'),
+        ('r', 'Reserved'),
+    )
+
+    status = models.CharField(
+        max_length=1
+        choices=LOAN_STATUS
+        blank=False
+        default='m'
+        help_text="Movie Availability"
+    )
+
+    class Meta:
+        ordering=['due_date']
+
+    def __str__(self):
+        return f'{self.id}, title = {self.movie.name}'
