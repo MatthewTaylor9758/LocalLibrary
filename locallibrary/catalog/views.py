@@ -58,3 +58,8 @@ class BookListView(generic.ListView):
 #         # Create any data and add it to the context
 #         context['some_data'] = 'This is just some data'
 #         return context
+# When doing this it is important to follow the pattern used above:
+
+# First get the existing context from our superclass.
+# Then add your new context information.
+# Then return the new (updated) context.
