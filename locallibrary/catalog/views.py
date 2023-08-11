@@ -32,6 +32,9 @@ def index(request):
 class BookListView(generic.ListView):
     model = Book
 
+class BookDetailView(generic.DetailView):
+    model = Book
+
 # You can add attributes to change the default behavior above. For example, you can
 # specify another template file if you need to have multiple views that use this same
 # model, or you might want to use a different template variable name if book_list is not
