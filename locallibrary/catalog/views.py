@@ -31,9 +31,29 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 10
 
 class BookDetailView(generic.DetailView):
     model = Book
+
+
+# BookDetailView class as a view function instead \/
+# def book_detail_view(request, primary_key):
+#     try:
+#         book = Book.objects.get(pk=primary_key)
+#     except Book.DoesNotExist:
+#         raise Http404('Book does not exist')
+
+#     return render(request, 'catalog/book_detail.html', context={'book': book})
+
+# The same view function for BookDetailView as above but with the shortcut function \/
+
+# from django.shortcuts import get_object_or_404
+
+# def book_detail_view(request, primary_key):
+#     book = get_object_or_404(Book, pk=primary_key)
+#     return render(request, 'catalog/book_detail.html', context={'book': book})
+
 
 # You can add attributes to change the default behavior above. For example, you can
 # specify another template file if you need to have multiple views that use this same
