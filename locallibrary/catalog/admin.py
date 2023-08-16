@@ -28,17 +28,17 @@ class BooksInstanceInline(admin.TabularInline):
     model = BookInstance
     extra = 0
 
-@admin.register(Book)
+# @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display=('title', 'author', 'display_genre')
 
     inlines = [BooksInstanceInline]
 
-# admin.site.register(Book, BookAdmin)
+admin.site.register(Book, BookAdmin)
 
 
 
-@admin.register(BookInstance)
+# @admin.register(BookInstance)
 class BookInstanceAdmin(admin.ModelAdmin):
     list_display=('book', 'status', 'borrower', 'due_back', 'id')
     list_filter=('status', 'due_back')
@@ -52,4 +52,4 @@ class BookInstanceAdmin(admin.ModelAdmin):
         }),
     )
 
-# admin.site.register(BookInstance, BookInstanceAdmin)
+admin.site.register(BookInstance, BookInstanceAdmin)
